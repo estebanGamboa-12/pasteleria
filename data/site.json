@@ -25,18 +25,27 @@
     {
       "title": "Tarta de frutos rojos",
       "description": "Bizcocho esponjoso, crema de vainilla y topping de frutos rojos.",
-      "price": "Desde 28€"
+      "price": "Desde 28€",
+      "image": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=900&q=80"
     },
     {
       "title": "Cheesecake de pistacho",
       "description": "Base crujiente, crema de pistacho y baño de chocolate blanco.",
-      "price": "Desde 32€"
+      "price": "Desde 32€",
+      "image": "https://images.unsplash.com/photo-1542826438-6c44b03d1b31?auto=format&fit=crop&w=900&q=80"
     },
     {
       "title": "Box de mini postres",
       "description": "Selección de 12 bocados dulces perfectos para compartir.",
-      "price": "Desde 22€"
+      "price": "Desde 22€",
+      "image": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=900&q=80"
     }
+  ],
+  "gallery": [
+    "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=900&q=80"
   ],
   "testimonials": [
     {

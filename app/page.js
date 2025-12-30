@@ -3,12 +3,13 @@ import site from '../data/site.json';
 export default function Home() {
   return (
     <main>
-      <header className="hero">
+      <div className="nav-wrapper">
         <nav className="nav">
           <div className="logo">{site.name}</div>
           <div className="nav-links">
             <a href="#catalogo">Catálogo</a>
             <a href="#experiencia">Experiencia</a>
+            <a href="#galeria">Galería</a>
             <a href="#testimonios">Testimonios</a>
             <a href="#contacto">Contacto</a>
           </div>
@@ -16,6 +17,9 @@ export default function Home() {
             WhatsApp
           </a>
         </nav>
+      </div>
+
+      <header className="hero">
         <div className="hero-content">
           <div>
             <p className="eyebrow">Pastelería artesanal</p>
@@ -34,12 +38,20 @@ export default function Home() {
               <span>Pedidos personalizados</span>
             </div>
           </div>
-          <div className="hero-card">
-            <h3>Agenda tu pedido hoy</h3>
-            <p>Cuéntanos tu idea y recibe una propuesta en menos de 2 horas.</p>
-            <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
-              Hablar con un pastelero
-            </a>
+          <div className="hero-visual">
+            <div className="hero-image">
+              <img
+                src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80"
+                alt="Tarta artesanal decorada"
+              />
+            </div>
+            <div className="hero-card">
+              <h3>Agenda tu pedido hoy</h3>
+              <p>Cuéntanos tu idea y recibe una propuesta en menos de 2 horas.</p>
+              <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+                Hablar con un pastelero
+              </a>
+            </div>
           </div>
         </div>
       </header>
@@ -52,6 +64,9 @@ export default function Home() {
         <div className="grid three">
           {site.products.map((product) => (
             <article key={product.title} className="card">
+              <div className="card-media">
+                <img src={product.image} alt={product.title} />
+              </div>
               <h3>{product.title}</h3>
               <p>{product.description}</p>
               <div className="card-footer">
@@ -76,6 +91,20 @@ export default function Home() {
               <h3>{feature.title}</h3>
               <p>{feature.text}</p>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="galeria" className="section gallery">
+        <div className="section-heading">
+          <h2>Tartas que enamoran</h2>
+          <p>Selección fresca y minimalista para inspirar tu próxima celebración.</p>
+        </div>
+        <div className="gallery-grid">
+          {site.gallery.map((image, index) => (
+            <div key={image} className={`gallery-item gallery-${index + 1}`}>
+              <img src={image} alt={`Tarta destacada ${index + 1}`} />
+            </div>
           ))}
         </div>
       </section>
@@ -128,6 +157,18 @@ export default function Home() {
           </a>
         </div>
       </footer>
+
+      <div className="mobile-dock">
+        <a className="dock-link" href="#catalogo">
+          Catálogo
+        </a>
+        <a className="dock-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+          {site.cta.primary}
+        </a>
+        <a className="dock-link" href="#contacto">
+          Contacto
+        </a>
+      </div>
     </main>
   );
 }
