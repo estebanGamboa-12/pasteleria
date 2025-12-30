@@ -1,0 +1,57 @@
+{
+  "name": "Pastelería Aurora",
+  "tagline": "Pastelería artesanal para celebrar cada momento",
+  "description": "Diseñamos pasteles, postres y mesas dulces personalizadas con ingredientes frescos y mucho cariño.",
+  "cta": {
+    "primary": "Ordena por WhatsApp",
+    "secondary": "Ver catálogo"
+  },
+  "whatsapp": "https://wa.me/34999000111?text=Hola%20Pasteler%C3%ADa%20Aurora%2C%20quiero%20hacer%20un%20pedido",
+  "features": [
+    {
+      "title": "Pasteles a medida",
+      "text": "Diseños personalizados para bodas, cumpleaños y eventos corporativos."
+    },
+    {
+      "title": "Entrega puntual",
+      "text": "Programamos entregas en tu zona con seguimiento y confirmación."
+    },
+    {
+      "title": "Ingredientes premium",
+      "text": "Usamos chocolate belga, frutas frescas y cremas artesanales."
+    }
+  ],
+  "products": [
+    {
+      "title": "Tarta de frutos rojos",
+      "description": "Bizcocho esponjoso, crema de vainilla y topping de frutos rojos.",
+      "price": "Desde 28€"
+    },
+    {
+      "title": "Cheesecake de pistacho",
+      "description": "Base crujiente, crema de pistacho y baño de chocolate blanco.",
+      "price": "Desde 32€"
+    },
+    {
+      "title": "Box de mini postres",
+      "description": "Selección de 12 bocados dulces perfectos para compartir.",
+      "price": "Desde 22€"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Carla M.",
+      "text": "El pastel fue espectacular, justo como lo soñábamos."
+    },
+    {
+      "name": "Luis R.",
+      "text": "La entrega fue puntual y los sabores increíbles."
+    }
+  ],
+  "contact": {
+    "address": "Calle de la Rosa 24, Madrid",
+    "phone": "+34 999 000 111",
+    "email": "hola@pasteleriaaurora.com",
+    "hours": "Lunes a sábado · 9:00 - 20:00"
+  }
+}
