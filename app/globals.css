@@ -76,6 +76,16 @@ main {
   font-weight: 500;
 }
 
+.nav-icon {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .hero {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 241, 245, 0.8) 70%, rgba(246, 239, 233, 0.8) 100%);
   padding: 3.5rem 6vw 5.5rem;
@@ -86,6 +96,10 @@ main {
   gap: 3rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   align-items: center;
+}
+
+.hero-mobile {
+  display: none;
 }
 
 .hero h1 {
@@ -343,7 +357,7 @@ main {
   }
 
   .hero {
-    padding: 2.5rem 6vw 4.5rem;
+    padding: 1.5rem 5vw 3.5rem;
   }
 
   .hero-note {
@@ -358,6 +372,132 @@ main {
   .nav-links,
   .nav .btn {
     display: none;
+  }
+
+  .nav {
+    justify-content: space-between;
+    padding: 0.9rem 5vw;
+  }
+
+  .nav-icon {
+    display: inline-flex;
+  }
+
+  .hero-desktop {
+    display: none;
+  }
+
+  .hero-mobile {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .hero-mobile-image {
+    position: relative;
+    border-radius: 1.6rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .hero-mobile-image img {
+    height: 260px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .hero-mobile-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: end;
+    gap: 0.6rem;
+    padding: 1.6rem;
+    color: white;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 10%, rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  .hero-mobile-overlay h1 {
+    font-size: 1.7rem;
+    line-height: 1.2;
+  }
+
+  .hero-mobile-overlay p {
+    font-size: 0.95rem;
+  }
+
+  .mobile-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .mobile-quick-actions article {
+    background: white;
+    padding: 1rem 0.9rem;
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 0.4rem;
+    text-align: center;
+  }
+
+  .mobile-quick-actions span {
+    font-size: 1.4rem;
+  }
+
+  .mobile-quick-actions h3 {
+    font-size: 0.95rem;
+  }
+
+  .mobile-quick-actions p {
+    font-size: 0.78rem;
+    color: var(--brown-700);
+  }
+
+  .mobile-news h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .mobile-news-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .mobile-news-card {
+    background: white;
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+  }
+
+  .mobile-news-card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .mobile-news-card div {
+    padding: 0.9rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .mobile-news-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .mobile-news-card p {
+    font-size: 0.78rem;
+    color: var(--brown-700);
+  }
+
+  .mobile-news-card a {
+    font-weight: 600;
+    color: var(--rose-500);
   }
 
   .mobile-dock {
