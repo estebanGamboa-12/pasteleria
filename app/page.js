@@ -1,9 +1,22 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import site from '../data/site.json';
 
 export default function Home() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 28 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const stagger = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.12 } },
+  };
+
   return (
     <main>
-      <div className="nav-wrapper">
+      <motion.div className="nav-wrapper" initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
         <nav className="nav">
           <div className="logo">{site.name}</div>
           <div className="nav-links">
@@ -17,11 +30,11 @@ export default function Home() {
             WhatsApp
           </a>
         </nav>
-      </div>
+      </motion.div>
 
-      <header className="hero">
+      <motion.header className="hero" initial="hidden" animate="show" variants={stagger}>
         <div className="hero-content">
-          <div>
+          <motion.div variants={fadeInUp}>
             <p className="eyebrow">Pastelería artesanal</p>
             <h1>{site.tagline}</h1>
             <p className="lead">{site.description}</p>
@@ -37,33 +50,40 @@ export default function Home() {
               <span>Entrega en 24-48h</span>
               <span>Pedidos personalizados</span>
             </div>
-          </div>
-          <div className="hero-visual">
-            <div className="hero-image">
+          </motion.div>
+          <motion.div className="hero-visual" variants={stagger}>
+            <motion.div className="hero-image" variants={fadeInUp}>
               <img
                 src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80"
                 alt="Tarta artesanal decorada"
               />
-            </div>
-            <div className="hero-card">
+            </motion.div>
+            <motion.div className="hero-card" variants={fadeInUp}>
               <h3>Agenda tu pedido hoy</h3>
               <p>Cuéntanos tu idea y recibe una propuesta en menos de 2 horas.</p>
               <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
                 Hablar con un pastelero
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </header>
+      </motion.header>
 
-      <section id="catalogo" className="section">
-        <div className="section-heading">
+      <motion.section
+        id="catalogo"
+        className="section"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
+        <motion.div className="section-heading" variants={fadeInUp}>
           <h2>Catálogo destacado</h2>
           <p>Opciones favoritas para sorprender en cualquier celebración.</p>
-        </div>
-        <div className="grid three">
+        </motion.div>
+        <motion.div className="grid three" variants={stagger}>
           {site.products.map((product) => (
-            <article key={product.title} className="card">
+            <motion.article key={product.title} className="card" variants={fadeInUp}>
               <div className="card-media">
                 <img src={product.image} alt={product.title} />
               </div>
@@ -75,71 +95,105 @@ export default function Home() {
                   Reservar
                 </a>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section id="experiencia" className="section alt">
-        <div className="section-heading">
+      <motion.section
+        id="experiencia"
+        className="section alt"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
+        <motion.div className="section-heading" variants={fadeInUp}>
           <h2>Una experiencia dulce y confiable</h2>
           <p>Trabajamos contigo para que cada detalle salga perfecto.</p>
-        </div>
-        <div className="grid three">
+        </motion.div>
+        <motion.div className="grid three" variants={stagger}>
           {site.features.map((feature) => (
-            <article key={feature.title} className="card soft">
+            <motion.article key={feature.title} className="card soft" variants={fadeInUp}>
               <h3>{feature.title}</h3>
               <p>{feature.text}</p>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section id="galeria" className="section gallery">
-        <div className="section-heading">
+      <motion.section
+        id="galeria"
+        className="section gallery"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
+        <motion.div className="section-heading" variants={fadeInUp}>
           <h2>Tartas que enamoran</h2>
           <p>Selección fresca y minimalista para inspirar tu próxima celebración.</p>
-        </div>
-        <div className="gallery-grid">
+        </motion.div>
+        <motion.div className="gallery-grid" variants={stagger}>
           {site.gallery.map((image, index) => (
-            <div key={image} className={`gallery-item gallery-${index + 1}`}>
+            <motion.div key={image} className={`gallery-item gallery-${index + 1}`} variants={fadeInUp}>
               <img src={image} alt={`Tarta destacada ${index + 1}`} />
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section id="testimonios" className="section">
-        <div className="section-heading">
+      <motion.section
+        id="testimonios"
+        className="section"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
+        <motion.div className="section-heading" variants={fadeInUp}>
           <h2>Clientes felices</h2>
           <p>Opiniones reales de quienes ya probaron nuestras delicias.</p>
-        </div>
-        <div className="grid two">
+        </motion.div>
+        <motion.div className="grid two" variants={stagger}>
           {site.testimonials.map((item) => (
-            <article key={item.name} className="testimonial">
+            <motion.article key={item.name} className="testimonial" variants={fadeInUp}>
               <p>“{item.text}”</p>
               <strong>{item.name}</strong>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className="section cta" id="contacto">
-        <div>
+      <motion.section
+        className="section cta"
+        id="contacto"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
+        <motion.div variants={fadeInUp}>
           <h2>¿Listo para tu próximo pedido?</h2>
           <p>Estamos listos para diseñar tu pastel ideal y entregarlo a tiempo.</p>
-        </div>
-        <div className="cta-actions">
+        </motion.div>
+        <motion.div className="cta-actions" variants={fadeInUp}>
           <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
             Hacer pedido
           </a>
           <a className="btn btn-outline" href="mailto:info@pasteleriaaurora.com">
             Escribir email
           </a>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <footer className="footer">
+      <motion.footer
+        className="footer"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={stagger}
+      >
         <div>
           <h3>{site.name}</h3>
           <p>{site.contact.address}</p>
@@ -156,9 +210,14 @@ export default function Home() {
             {site.cta.primary}
           </a>
         </div>
-      </footer>
+      </motion.footer>
 
-      <div className="mobile-dock">
+      <motion.div
+        className="mobile-dock"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         <a className="dock-link" href="#catalogo">
           Catálogo
         </a>
@@ -168,7 +227,7 @@ export default function Home() {
         <a className="dock-link" href="#contacto">
           Contacto
         </a>
-      </div>
+      </motion.div>
     </main>
   );
 }
