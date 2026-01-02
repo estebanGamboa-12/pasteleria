@@ -10,6 +10,12 @@
   --shadow-soft: 0 10px 30px rgba(45, 28, 31, 0.08);
   --glass: rgba(255, 255, 255, 0.7);
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* para que el nav sticky no tape los títulos */
+}
+
+
 
 * {
   box-sizing: border-box;
@@ -338,6 +344,8 @@ main {
 }
 
 @media (max-width: 640px) {
+  body { background-attachment: scroll; }
+
   main {
     padding-bottom: 7rem;
   }

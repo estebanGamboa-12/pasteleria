@@ -1,12 +1,20 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import site from '../data/site.json';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import site from "../data/site.json"; // ajusta si tu ruta es distinta
+
+function waLink(message) {
+  // Si quieres usar el mismo número del JSON, lo ideal sería guardarlo aparte,
+  // pero aquí lo dejo directo como en tu wa.me actual.
+  const base = "https://wa.me/34999000111";
+  return `${base}?text=${encodeURIComponent(message)}`;
+}
 
 export default function Home() {
   const fadeInUp = {
     hidden: { opacity: 0, y: 28 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   const stagger = {
@@ -17,8 +25,9 @@ export default function Home() {
   return (
     <main>
       <motion.div className="nav-wrapper" initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-        <nav className="nav">
+        <nav className="nav" aria-label="Navegación principal">
           <div className="logo">{site.name}</div>
+
           <div className="nav-links">
             <a href="#catalogo">Catálogo</a>
             <a href="#experiencia">Experiencia</a>
@@ -26,7 +35,8 @@ export default function Home() {
             <a href="#testimonios">Testimonios</a>
             <a href="#contacto">Contacto</a>
           </div>
-          <a className="btn btn-outline" href={site.whatsapp} target="_blank" rel="noreferrer">
+
+          <a className="btn btn-outline" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
             WhatsApp
           </a>
         </nav>
@@ -38,30 +48,44 @@ export default function Home() {
             <p className="eyebrow">Pastelería artesanal</p>
             <h1>{site.tagline}</h1>
             <p className="lead">{site.description}</p>
+
             <div className="cta-group">
-              <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+              <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
                 {site.cta.primary}
               </a>
               <a className="btn btn-ghost" href="#catalogo">
                 {site.cta.secondary}
               </a>
             </div>
+
             <div className="hero-note">
               <span>Entrega en 24-48h</span>
               <span>Pedidos personalizados</span>
             </div>
           </motion.div>
+
           <motion.div className="hero-visual" variants={stagger}>
             <motion.div className="hero-image" variants={fadeInUp}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80"
                 alt="Tarta artesanal decorada"
+                width={900}
+                height={320}
+                priority
+                sizes="(max-width: 900px) 100vw, 40vw"
+                style={{ width: "100%", height: "320px", objectFit: "cover" }}
               />
             </motion.div>
+
             <motion.div className="hero-card" variants={fadeInUp}>
               <h3>Agenda tu pedido hoy</h3>
               <p>Cuéntanos tu idea y recibe una propuesta en menos de 2 horas.</p>
-              <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+              <a
+                className="btn btn-primary"
+                href={waLink("Hola Pastelería Aurora, quiero hacer un pedido. ¿Me ayudáis a elegir el pastel ideal?")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Hablar con un pastelero
               </a>
             </motion.div>
@@ -81,22 +105,36 @@ export default function Home() {
           <h2>Catálogo destacado</h2>
           <p>Opciones favoritas para sorprender en cualquier celebración.</p>
         </motion.div>
+
         <motion.div className="grid three" variants={stagger}>
-          {site.products.map((product) => (
-            <motion.article key={product.title} className="card" variants={fadeInUp}>
-              <div className="card-media">
-                <img src={product.image} alt={product.title} />
-              </div>
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
-              <div className="card-footer">
-                <span>{product.price}</span>
-                <a href={site.whatsapp} target="_blank" rel="noreferrer">
-                  Reservar
-                </a>
-              </div>
-            </motion.article>
-          ))}
+          {site.products.map((product) => {
+            const msg = `Hola Pastelería Aurora, quiero pedir: ${product.title}. ¿Me das opciones y precio final?`;
+            return (
+              <motion.article key={product.title} className="card" variants={fadeInUp}>
+                <div className="card-media">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    width={900}
+                    height={600}
+                    loading="lazy"
+                    sizes="(max-width: 900px) 100vw, 33vw"
+                    style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                  />
+                </div>
+
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+
+                <div className="card-footer">
+                  <span>{product.price}</span>
+                  <a href={waLink(msg)} target="_blank" rel="noopener noreferrer">
+                    Reservar
+                  </a>
+                </div>
+              </motion.article>
+            );
+          })}
         </motion.div>
       </motion.section>
 
@@ -112,6 +150,7 @@ export default function Home() {
           <h2>Una experiencia dulce y confiable</h2>
           <p>Trabajamos contigo para que cada detalle salga perfecto.</p>
         </motion.div>
+
         <motion.div className="grid three" variants={stagger}>
           {site.features.map((feature) => (
             <motion.article key={feature.title} className="card soft" variants={fadeInUp}>
@@ -134,10 +173,19 @@ export default function Home() {
           <h2>Tartas que enamoran</h2>
           <p>Selección fresca y minimalista para inspirar tu próxima celebración.</p>
         </motion.div>
+
         <motion.div className="gallery-grid" variants={stagger}>
           {site.gallery.map((image, index) => (
             <motion.div key={image} className={`gallery-item gallery-${index + 1}`} variants={fadeInUp}>
-              <img src={image} alt={`Tarta destacada ${index + 1}`} />
+              <Image
+                src={image}
+                alt={`Tarta destacada ${index + 1}`}
+                width={900}
+                height={900}
+                loading="lazy"
+                sizes="(max-width: 900px) 50vw, 25vw"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </motion.div>
           ))}
         </motion.div>
@@ -155,6 +203,7 @@ export default function Home() {
           <h2>Clientes felices</h2>
           <p>Opiniones reales de quienes ya probaron nuestras delicias.</p>
         </motion.div>
+
         <motion.div className="grid two" variants={stagger}>
           {site.testimonials.map((item) => (
             <motion.article key={item.name} className="testimonial" variants={fadeInUp}>
@@ -177,11 +226,12 @@ export default function Home() {
           <h2>¿Listo para tu próximo pedido?</h2>
           <p>Estamos listos para diseñar tu pastel ideal y entregarlo a tiempo.</p>
         </motion.div>
+
         <motion.div className="cta-actions" variants={fadeInUp}>
-          <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+          <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
             Hacer pedido
           </a>
-          <a className="btn btn-outline" href="mailto:info@pasteleriaaurora.com">
+          <a className="btn btn-outline" href={`mailto:${site.contact.email}`}>
             Escribir email
           </a>
         </motion.div>
@@ -199,14 +249,16 @@ export default function Home() {
           <p>{site.contact.address}</p>
           <p>{site.contact.hours}</p>
         </div>
+
         <div>
           <h4>Contacto</h4>
           <p>{site.contact.phone}</p>
           <p>{site.contact.email}</p>
         </div>
+
         <div>
           <h4>WhatsApp directo</h4>
-          <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+          <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
             {site.cta.primary}
           </a>
         </div>
@@ -217,11 +269,12 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
+        aria-label="Accesos rápidos"
       >
         <a className="dock-link" href="#catalogo">
           Catálogo
         </a>
-        <a className="dock-primary" href={site.whatsapp} target="_blank" rel="noreferrer">
+        <a className="dock-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
           {site.cta.primary}
         </a>
         <a className="dock-link" href="#contacto">
