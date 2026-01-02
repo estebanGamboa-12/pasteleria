@@ -570,10 +570,17 @@ main {
     font-weight: 600;
     text-align: center;
     background: var(--cream-200);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
   .dock-item span:first-child {
     font-size: 1rem;
+  }
+
+  .dock-item.is-active {
+    background: var(--rose-200);
+    color: var(--brown-900);
+    transform: translateY(-2px);
   }
 
   .dock-primary {
