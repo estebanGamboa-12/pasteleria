@@ -318,14 +318,21 @@ export default function Home() {
         transition={{ duration: 0.6, delay: 0.4 }}
         aria-label="Accesos rápidos"
       >
-        <a className="dock-link" href="#catalogo">
-          Catálogo
+        <a className="dock-item" href="#catalogo">
+          <span aria-hidden>🍰</span>
+          <span>Catálogo</span>
         </a>
-        <a className="dock-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-          {site.cta.primary}
+        <a className="dock-item" href="#experiencia">
+          <span aria-hidden>✨</span>
+          <span>Experiencia</span>
         </a>
-        <a className="dock-link" href="#contacto">
-          Contacto
+        <a className="dock-item dock-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+          <span aria-hidden>💬</span>
+          <span>{site.cta.primary}</span>
+        </a>
+        <a className="dock-item" href="#contacto">
+          <span aria-hidden>📍</span>
+          <span>Contacto</span>
         </a>
       </motion.div>
     </main>
