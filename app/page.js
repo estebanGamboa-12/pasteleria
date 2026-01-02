@@ -119,10 +119,13 @@ export default function Home() {
             <a href="#testimonios">Testimonios</a>
             <a href="#contacto">Contacto</a>
           </div>
-          <button className="nav-icon" type="button" aria-label="Buscar">
-            <span aria-hidden>🔍</span>
+          <button className="nav-icon" type="button" aria-label="Ver especialidades">
+            <span aria-hidden>🎂</span>
           </button>
           <a className="btn btn-outline" href={site.whatsapp} target="_blank" rel="noreferrer">
+            <span className="btn-icon" aria-hidden>
+              🟢
+            </span>
             WhatsApp
           </a>
         </nav>
@@ -137,6 +140,9 @@ export default function Home() {
 
             <div className="cta-group">
               <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+                <span className="btn-icon" aria-hidden>
+                  🟢
+                </span>
                 {site.cta.primary}
               </a>
               <a className="btn btn-ghost" href="#catalogo">
@@ -159,7 +165,7 @@ export default function Home() {
                 height={320}
                 priority
                 sizes="(max-width: 900px) 100vw, 40vw"
-                style={{ width: "100%", height: "320px", objectFit: "cover" }}
+                style={{ width: "100%", height: "360px", objectFit: "cover" }}
               />
             </motion.div>
 
@@ -172,6 +178,9 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <span className="btn-icon" aria-hidden>
+                  🟢
+                </span>
                 Hablar con un pastelero
               </a>
             </motion.div>
@@ -186,7 +195,7 @@ export default function Home() {
               height={320}
               priority
               sizes="(max-width: 640px) 100vw, 40vw"
-              style={{ width: "100%", height: "260px", objectFit: "cover" }}
+              style={{ width: "100%", height: "280px", objectFit: "cover" }}
             />
             <div className="hero-mobile-overlay">
               <p className="eyebrow">Bienvenido a nuestra pastelería</p>
@@ -255,7 +264,7 @@ export default function Home() {
                     height={600}
                     loading="lazy"
                     sizes="(max-width: 900px) 100vw, 33vw"
-                    style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                    style={{ width: "100%", height: "200px", objectFit: "cover" }}
                   />
                 </div>
 
@@ -365,6 +374,9 @@ export default function Home() {
 
         <motion.div className="cta-actions" variants={fadeInUp}>
           <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+            <span className="btn-icon" aria-hidden>
+              🟢
+            </span>
             Hacer pedido
           </a>
           <a className="btn btn-outline" href={`mailto:${site.contact.email}`}>
@@ -395,6 +407,9 @@ export default function Home() {
         <div>
           <h4>WhatsApp directo</h4>
           <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+            <span className="btn-icon" aria-hidden>
+              🟢
+            </span>
             {site.cta.primary}
           </a>
         </div>
@@ -424,7 +439,7 @@ export default function Home() {
           <span>Experiencia</span>
         </a>
         <a className="dock-item dock-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
-          <span aria-hidden>💬</span>
+          <span aria-hidden>🟢</span>
           <span>{site.cta.primary}</span>
         </a>
         <a
