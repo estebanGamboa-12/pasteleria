@@ -35,15 +35,17 @@ export default function Home() {
             <a href="#testimonios">Testimonios</a>
             <a href="#contacto">Contacto</a>
           </div>
-
-          <a className="btn btn-outline" href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+          <button className="nav-icon" type="button" aria-label="Buscar">
+            <span aria-hidden>🔍</span>
+          </button>
+          <a className="btn btn-outline" href={site.whatsapp} target="_blank" rel="noreferrer">
             WhatsApp
           </a>
         </nav>
       </motion.div>
 
       <motion.header className="hero" initial="hidden" animate="show" variants={stagger}>
-        <div className="hero-content">
+        <div className="hero-content hero-desktop">
           <motion.div variants={fadeInUp}>
             <p className="eyebrow">Pastelería artesanal</p>
             <h1>{site.tagline}</h1>
@@ -90,6 +92,51 @@ export default function Home() {
               </a>
             </motion.div>
           </motion.div>
+        </div>
+        <div className="hero-mobile">
+          <div className="hero-mobile-image">
+            <img
+              src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=80"
+              alt="Pastel con frutas frescas"
+            />
+            <div className="hero-mobile-overlay">
+              <p className="eyebrow">Bienvenido a nuestra pastelería</p>
+              <h1>{site.tagline}</h1>
+              <p>{site.description}</p>
+            </div>
+          </div>
+          <div className="mobile-quick-actions">
+            <article>
+              <span role="img" aria-label="Pastel">🍰</span>
+              <h3>Pedidos</h3>
+              <p>Agenda tu diseño personalizado.</p>
+            </article>
+            <article>
+              <span role="img" aria-label="Caja regalo">🎁</span>
+              <h3>Ofertas</h3>
+              <p>Promos dulces de temporada.</p>
+            </article>
+            <article>
+              <span role="img" aria-label="Corazón">❤️</span>
+              <h3>Favoritos</h3>
+              <p>Guarda tus sabores top.</p>
+            </article>
+          </div>
+          <div className="mobile-news">
+            <h2>Novedades dulces</h2>
+            <div className="mobile-news-list">
+              {site.products.slice(0, 2).map((product) => (
+                <article key={product.title} className="mobile-news-card">
+                  <img src={product.image} alt={product.title} />
+                  <div>
+                    <h3>{product.title}</h3>
+                    <p>{product.description}</p>
+                    <a href="#catalogo">Ver más ›</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </motion.header>
 
