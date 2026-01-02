@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
 import site from "../data/site.json"; // ajusta si tu ruta es distinta
 
 function waLink(message) {
@@ -12,6 +13,53 @@ function waLink(message) {
 }
 
 export default function Home() {
+  const sectionConfigs = useMemo(
+    () => [
+      { id: "catalogo", dock: "catalogo" },
+      { id: "experiencia", dock: "experiencia" },
+      { id: "galeria", dock: "experiencia" },
+      { id: "testimonios", dock: "experiencia" },
+      { id: "contacto", dock: "contacto" },
+    ],
+    []
+  );
+  const [activeSection, setActiveSection] = useState("catalogo");
+
+  useEffect(() => {
+    const sections = sectionConfigs
+      .map((section) => document.getElementById(section.id))
+      .filter(Boolean);
+    if (sections.length === 0) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = sectionConfigs.find((section) => section.id === entry.target.id);
+            if (match) {
+              setActiveSection(match.dock);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [sectionConfigs]);
+
+  const heroImage =
+    "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80";
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 28 },
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -69,7 +117,7 @@ export default function Home() {
           <motion.div className="hero-visual" variants={stagger}>
             <motion.div className="hero-image" variants={fadeInUp}>
               <Image
-                src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80"
+                src={heroImage}
                 alt="Tarta artesanal decorada"
                 width={900}
                 height={320}
@@ -95,9 +143,14 @@ export default function Home() {
         </div>
         <div className="hero-mobile">
           <div className="hero-mobile-image">
-            <img
-              src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=80"
-              alt="Pastel con frutas frescas"
+            <Image
+              src={heroImage}
+              alt="Tarta artesanal decorada"
+              width={900}
+              height={320}
+              priority
+              sizes="(max-width: 640px) 100vw, 40vw"
+              style={{ width: "100%", height: "260px", objectFit: "cover" }}
             />
             <div className="hero-mobile-overlay">
               <p className="eyebrow">Bienvenido a nuestra pastelería</p>
@@ -318,11 +371,19 @@ export default function Home() {
         transition={{ duration: 0.6, delay: 0.4 }}
         aria-label="Accesos rápidos"
       >
-        <a className="dock-item" href="#catalogo">
+        <a
+          className={`dock-item${activeSection === "catalogo" ? " is-active" : ""}`}
+          href="#catalogo"
+          onClick={() => setActiveSection("catalogo")}
+        >
           <span aria-hidden>🍰</span>
           <span>Catálogo</span>
         </a>
-        <a className="dock-item" href="#experiencia">
+        <a
+          className={`dock-item${activeSection === "experiencia" ? " is-active" : ""}`}
+          href="#experiencia"
+          onClick={() => setActiveSection("experiencia")}
+        >
           <span aria-hidden>✨</span>
           <span>Experiencia</span>
         </a>
@@ -330,7 +391,11 @@ export default function Home() {
           <span aria-hidden>💬</span>
           <span>{site.cta.primary}</span>
         </a>
-        <a className="dock-item" href="#contacto">
+        <a
+          className={`dock-item${activeSection === "contacto" ? " is-active" : ""}`}
+          href="#contacto"
+          onClick={() => setActiveSection("contacto")}
+        >
           <span aria-hidden>📍</span>
           <span>Contacto</span>
         </a>
