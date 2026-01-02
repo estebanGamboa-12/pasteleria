@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import site from "../data/site.json"; // ajusta si tu ruta es distinta
 
@@ -24,6 +24,22 @@ export default function Home() {
     []
   );
   const [activeSection, setActiveSection] = useState("catalogo");
+  const [isDesktop, setIsDesktop] = useState(false);
+  const { scrollY } = useScroll();
+  const heroImageY = useTransform(scrollY, [0, 500], [0, 90]);
+  const heroCardY = useTransform(scrollY, [0, 500], [0, -60]);
+  const heroContentY = useTransform(scrollY, [0, 500], [0, 40]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const handleChange = (event) => setIsDesktop(event.matches);
+    handleChange(media);
+    media.addEventListener("change", handleChange);
+
+    return () => {
+      media.removeEventListener("change", handleChange);
+    };
+  }, []);
 
   useEffect(() => {
     const sections = sectionConfigs
@@ -60,15 +76,35 @@ export default function Home() {
   const heroImage =
     "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80";
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 28 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  };
+  const fadeInUp = useMemo(
+    () => ({
+      hidden: isDesktop ? { opacity: 0, y: 70, scale: 0.96, filter: "blur(8px)" } : { opacity: 0, y: 28 },
+      show: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        transition: { duration: isDesktop ? 0.85 : 0.6, ease: "easeOut" },
+      },
+    }),
+    [isDesktop]
+  );
 
-  const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12 } },
-  };
+  const stagger = useMemo(
+    () => ({
+      hidden: {},
+      show: { transition: { staggerChildren: isDesktop ? 0.18 : 0.12, delayChildren: isDesktop ? 0.1 : 0 } },
+    }),
+    [isDesktop]
+  );
+
+  const sectionViewport = useMemo(
+    () => ({
+      once: true,
+      amount: isDesktop ? 0.35 : 0.2,
+    }),
+    [isDesktop]
+  );
 
   return (
     <main>
@@ -94,7 +130,7 @@ export default function Home() {
 
       <motion.header className="hero" initial="hidden" animate="show" variants={stagger}>
         <div className="hero-content hero-desktop">
-          <motion.div variants={fadeInUp}>
+          <motion.div variants={fadeInUp} style={isDesktop ? { y: heroContentY } : undefined}>
             <p className="eyebrow">Pastelería artesanal</p>
             <h1>{site.tagline}</h1>
             <p className="lead">{site.description}</p>
@@ -115,7 +151,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div className="hero-visual" variants={stagger}>
-            <motion.div className="hero-image" variants={fadeInUp}>
+            <motion.div className="hero-image" variants={fadeInUp} style={isDesktop ? { y: heroImageY } : undefined}>
               <Image
                 src={heroImage}
                 alt="Tarta artesanal decorada"
@@ -127,7 +163,7 @@ export default function Home() {
               />
             </motion.div>
 
-            <motion.div className="hero-card" variants={fadeInUp}>
+            <motion.div className="hero-card" variants={fadeInUp} style={isDesktop ? { y: heroCardY } : undefined}>
               <h3>Agenda tu pedido hoy</h3>
               <p>Cuéntanos tu idea y recibe una propuesta en menos de 2 horas.</p>
               <a
@@ -198,7 +234,7 @@ export default function Home() {
         className="section"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={sectionViewport}
         variants={stagger}
       >
         <motion.div className="section-heading" variants={fadeInUp}>
@@ -243,7 +279,7 @@ export default function Home() {
         className="section alt"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={sectionViewport}
         variants={stagger}
       >
         <motion.div className="section-heading" variants={fadeInUp}>
@@ -266,7 +302,7 @@ export default function Home() {
         className="section gallery"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={sectionViewport}
         variants={stagger}
       >
         <motion.div className="section-heading" variants={fadeInUp}>
@@ -296,7 +332,7 @@ export default function Home() {
         className="section"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={sectionViewport}
         variants={stagger}
       >
         <motion.div className="section-heading" variants={fadeInUp}>
@@ -319,7 +355,7 @@ export default function Home() {
         id="contacto"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={sectionViewport}
         variants={stagger}
       >
         <motion.div variants={fadeInUp}>
@@ -341,7 +377,7 @@ export default function Home() {
         className="footer"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={sectionViewport}
         variants={stagger}
       >
         <div>
